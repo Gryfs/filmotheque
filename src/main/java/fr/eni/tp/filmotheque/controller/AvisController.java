@@ -35,7 +35,7 @@ public class AvisController {
 			// Il y a un membre en session
 			System.out.println(membreEnSession.getId());
 			Film f = this.filmService.consulterFilmParId(idFilm);
-			
+			System.out.println("Bonsoir");
 			if(f != null) {
 				model.addAttribute("film", f);
 				
