@@ -33,7 +33,7 @@ public class FilmController {
 
 	@GetMapping("films")
 	public String afficherFilms(Model model) {
-
+		System.out.println("Affiche les films : ");
 		List<Film> listeFilms = filmService.consulterFilms();
 
 		model.addAttribute("films", listeFilms);
