@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="icon" th:href="@{../img/logoENI.png}" />
+
+<link rel="stylesheet" th:href="@{/css/general.css}" />
+</head>
+<body>
+	<div th:replace="~{fragments/fragment-entete :: entete}"></div>
+
+	<div th:if="${membreSession == null || membreSession.id == 0}">
+
+		<a th:href="@{/session?email=jtrillard@campus-eni.fr}">Julien</a> 
+		<a th:href="@{/session?email=abaille@campus-eni.fr}">Anne-Lise</a> 
+		<a th:href="@{/session?email=sgobin@campus-eni.fr}">Stéphane</a>
+	</div>
+
+	<div th:if="${membreSession != null && membreSession.id != 0}">
+
+		<form action="/deconnexion" method="get">
+			<button type="submit">Déconnexion</button>
+		</form>
+	</div>
+
+
+	<div th:replace="~{fragments/fragment-piedpage :: footer}"></div>
+
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" th:href="@{/css/general.css}" />
+<link rel="stylesheet" th:href="@{/css/demo-table.css}" />
+</head>
+<body>
+	<div th:replace="~{fragments/fragment-entete :: entete}"></div>
+
+	<form th:action="@{/avis}" method="POST" th:object="${avis}">
+	<h1 th:text="${film.titre}"></h1>
+	
+	<ul th:if="${#fields.hasErrors('*')}">Erreur de saisies
+		</ul>
+		<ul th:if="${#fields.hasErrors('global')}">
+			<li th:each="err : ${#fields.errors('global')}" th:text="#{${err}}">Input
+				is incorrect</li>
+		</ul>
+	<input type="hidden" name="idFilm" th:value="${film.id}" />
+		<ul class="flex-outer">
+		
+			<li><label for="note">Note</label> <input id="note"
+				type="number" th:field="*{note}" min="0" max="5" required>
+				
+			<li><label for="commentaire">Commentaire</label> <input
+				id="commentaire" type="text" th:field="*{commentaire}">
+				
+			<li>
+				<button type="submit">Enregistrer</button>
+			</li>
+
+		</ul>
+	</form>
+
+
+
+
+
+	<div th:replace="~{fragments/fragment-piedpage :: footer}"></div>
+
+</body>
+</html>

@@ -1,0 +1,24 @@
+
+<header th:fragment="entete">
+	<nav>
+		
+			 <div class="navbar-brand">
+			<img src="/img/logoFilmotheque.png" alt="film" class="logo">
+			<span class="brand-text">Filmothèque</span>
+			
+			<div th:if="${membreSession != null && membreSession.id != 0}">
+			<p th:text="${membreSession.prenom}"> </p>
+			</div>
+			 
+			 <div class="navbar-links">
+			<a th:href="@{/films}">Liste films</a>
+			<a sec:authorize="hasRole('ADMIN')" th:href="@{/creer}">Créer</a>
+			<!-- <a sec:authorize="isAuthenticated()" th:href="@{/contexte}">Contextes</a> -->
+			<a sec:authorize="!isAuthenticated()" th:href="@{/login}" >Connexion</a></li>
+			<a sec:authorize="!isAuthenticated()" th:href="@{/register}" >Inscription</a></li>
+			<a sec:authorize="isAuthenticated()" th:href="@{/logout}" >Déconnexion</a></li>
+			</div>
+			</div>
+		
+	</nav>
+</header>

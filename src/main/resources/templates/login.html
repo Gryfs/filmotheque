@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Demo Spring Boot Web</title>
+<link rel="stylesheet" th:href="@{/css/demo-form.css}">
+<link rel="icon" th:href="@{/img/logoENI.png}" />
+<link rel="stylesheet" th:href="@{/css/general.css}" />
+</head>
+<body>
+	<div th:replace="~{fragments/fragment-entete :: entete}"></div>
+
+
+	<form th:action="@{/login}" method="POST">
+		<h1>Connexion</h1>
+		<p th:if="${param.error}">L'email ou le mot de passe est incorrect</p>
+
+		<ul class="flex-outer">
+			<li><label for="idUsername">Email</label>
+			<input id="idUsername" type="text" name="username"/>
+			</li>
+			<li>
+				<label for="idPassword">Mot de passe</label> 
+				<input id="idPassword" type="password" name="password"/>
+			<li>
+				<button type="submit">Enregistrer</button>
+			</li>
+		</ul>
+
+	</form>
+
+
+
+	<div th:replace="~{fragments/fragment-piedpage :: footer}"></div>
+</body>
+</html>>

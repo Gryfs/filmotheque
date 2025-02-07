@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="icon" th:href="@{../img/logoENI.png}" />
+
+<link rel="stylesheet" th:href="@{/css/general.css}" />
+</head>
+<body>
+	<div th:replace="~{fragments/fragment-entete :: entete}"></div>
+
+
+	<form th:action="@{/creer}" method="POST" th:object="${film}">
+		<h1>Création du film</h1>
+
+		<ul th:if="${#fields.hasErrors('*')}">Erreur de saisies
+		</ul>
+		<ul th:if="${#fields.hasErrors('global')}">
+			<li th:each="err : ${#fields.errors('global')}" th:text="#{${err}}">Input
+				is incorrect</li>
+		</ul>
+
+		<ul class="flex-outer">
+			<li><label for="titre">Titre</label> <input id="titre"
+				type="text" th:field="*{titre}">
+				<p th:if="${#fields.hasErrors('titre')}" th:errors="*{titre}"></p></li>
+
+
+			<li><label for="annee">Date de sortie</label> <input id="annee"
+				type="number" th:field="*{annee}">
+				<p th:if="${#fields.hasErrors('annee')}" th:errors="*{annee}"></p></li>
+
+			<li><label for="genre">Genre : </label> <select id="genre"
+				th:field="*{genre}" required>
+					
+					<option th:each="g : ${genreSession}" th:value="${g.id}"
+						th:text="${g.titre}"></option>
+			</select>
+				<p th:if="${#fields.hasErrors('genre')}" th:errors="*{genre}"></p></li>
+
+			<li><label for="realisateur">Réalisateur : </label> <select
+				id="realisateur" th:field="*{realisateur}" required>
+					
+					<option th:each="r : ${participantSession}" th:value="${r.id}"
+						th:text="${r.prenom} + ' ' + ${r.nom}">
+			</select>
+				<p th:if="${#fields.hasErrors('realisateur')}"
+					th:errors="*{realisateur}"></p></li>
+
+			<li><label for="acteurs">Acteurs : </label> <select id="acteur"
+				multiple th:field="*{acteurs}">
+					<option th:each="a : ${participantSession}" th:value="${a.id}"
+						th:text="${a.prenom} + ' ' + ${a.nom}">
+			</select></li>
+
+			<li><label for="duree">Durée</label> <input id="duree"
+				type="number" th:field="*{duree}" min="1" required></li>
+
+			<li><label for="synopsis">Synopsis</label> <input id="synopsis"
+				type="text" th:field="*{synopsis}" minlength="25" maxlength="250"
+				required></li>
+
+
+
+
+			<li>
+				<button type="submit">Enregistrer</button>
+			</li>
+		</ul>
+
+	</form>
+
+
+	<div th:replace="~{fragments/fragment-piedpage :: footer}"></div>
+
+</body>
+</html>

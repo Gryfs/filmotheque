@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" th:href="@{/css/general.css}" />
+<link rel="stylesheet" th:href="@{/css/demo-table.css}" />
+</head>
+<body>
+	<div class="page-container">
+		<div th:replace="~{fragments/fragment-entete :: entete}"></div>
+		<main class="main-content">
+
+			<h1>Les films de l'ENI</h1>
+
+			<table>
+				<thead>
+					<tr>
+						<th>Genre</th>
+						<th>Année</th>
+						<th>Titre</th>
+						<th>Réalisateur</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="item : ${films}">
+						<td th:text="${item.genre.titre}"></td>
+						<td th:text="${item.annee}"></td>
+						<td th:text="${item.titre}"></td>
+						<td
+							th:text="${item.realisateur.prenom}+ ' ' + ${item.realisateur.nom}"></td>
+						<td><a th:href="@{/detail(id=${item.id})}">Detail</a></td>
+						
+						<td><a sec:authorize="hasRole('ROLE_MEMBRE')" 
+							th:href="@{/avis(idFilm=${item.id})}">Avis</a></td>
+
+					</tr>
+				</tbody>
+			</table>
+
+			<a th:href="@{/index}">Page principale</a>
+		</main>
+
+
+		<div th:replace="~{fragments/fragment-piedpage :: footer}"></div>
+	</div>
+</body>
+</html>

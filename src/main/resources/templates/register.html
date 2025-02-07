@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Demo Spring Boot Web</title>
+    <link rel="stylesheet" th:href="@{/css/demo-form.css}">
+    <link rel="icon" th:href="@{/img/logoENI.png}" />
+    <link rel="stylesheet" th:href="@{/css/general.css}" />
+</head>
+<body>
+    <div th:replace="~{fragments/fragment-entete :: entete}"></div>
+
+    <form th:action="@{/register}" method="POST" th:object="${membre}">
+        <h1>Inscription</h1>
+
+        <!-- Affichage des erreurs globales -->
+        <ul th:if="${#fields.hasErrors('*')}">
+            <li th:text="'Erreur de saisies'"></li>
+        </ul>
+
+        <!-- Affichage des erreurs globales liées à l'objet -->
+        <ul th:if="${#fields.hasErrors('global')}">
+            <li th:each="err : ${#fields.errors('global')}" th:text="${err}"></li>
+        </ul>
+
+        <ul class="flex-outer">
+            <!-- Nom -->
+            <li>
+                <label for="nom">Nom</label>
+                <input th:field="*{nom}" id="nom" type="text" name="nom"/>
+                <div th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}"></div>
+            </li>
+
+            <!-- Prénom -->
+            <li>
+                <label for="prenom">Prénom</label>
+                <input th:field="*{prenom}" id="prenom" type="text" name="prenom"/>
+                <div th:if="${#fields.hasErrors('prenom')}" th:errors="*{prenom}"></div>
+            </li>
+
+            <!-- Email -->
+            <li>
+                <label for="idUsername">Email</label>
+                <input th:field="*{pseudo}" id="idUsername" type="email" name="pseudo"/>
+                <div th:if="${#fields.hasErrors('pseudo')}" th:errors="*{pseudo}"></div>
+            </li>
+
+            <!-- Mot de passe -->
+            <li>
+                <label for="idPassword">Mot de passe</label>
+                <input th:field="*{motDePasse}" id="idPassword" type="password" name="motDePasse"/>
+                <div th:if="${#fields.hasErrors('motDePasse')}" th:errors="*{motDePasse}"></div>
+            </li>
+
+            <button type="submit">Enregistrer</button>
+        </ul>
+    </form>
+
+    <div th:replace="~{fragments/fragment-piedpage :: footer}"></div>
+</body>
+</html>

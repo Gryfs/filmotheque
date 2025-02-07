@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<link rel="stylesheet" th:href="@{/css/general.css}" />
+<link rel="stylesheet" th:href="@{/css/demo-table.css}" />
+</head>
+<body>
+	<div class="page-container">
+
+		<div th:replace="~{fragments/fragment-entete :: entete}"></div>
+
+
+		<h1>Detail du film : <span th:text="${film.titre}"></span> </h1>
+
+		<table>
+			<tr>
+				<th>Genre :</th>
+				<td name="genre" th:text="${film.genre.titre}"></td>
+			</tr>
+			<tr>
+				<th>Année :</th>
+				<td name="annee" th:text="${film.annee}"></td>
+			</tr>
+			<tr>
+				<th>Titre :</th>
+				<td name="titre" th:text="${film.titre}"></td>
+			</tr>
+			<tr>
+				<th>Réalisateur :</th>
+				<td name="realisateur"
+					th:text="${film.realisateur.prenom}+ ' ' + ${film.realisateur.nom}">
+				</td>
+			</tr>
+			<tr>
+				<th>Durée :</th>
+				<td name="duree" th:text="${film.duree}"></td>
+			</tr>
+			<tr>
+				<th>Acteur(s) :</th>
+				<td>
+					<ul>
+						<li name="" id="idActeurs" multiple="multiple"
+							th:each="a : ${film.acteurs}"
+							th:text="${a.prenom} + ' ' + ${a.nom}"></li>
+					</ul>
+				</td>
+			</tr>
+			<tr>
+				<th>Synopsis :</th>
+				<td name="synopsis" th:text="${film.synopsis}"></td>
+			</tr>
+			<tr>
+				<th>Avis(s) :</th>
+				<td>
+					<ul>
+						<li name="" id="idAvis" multiple="multiple"
+							th:each="a : ${film.avis}"
+							th:text="${a.membre.nom} + ' ' + ${a.membre.prenom} + ' ' + ${a.note} + ' / 5  :' + ${a.commentaire}"></li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+
+		<div th:replace="~{fragments/fragment-piedpage :: footer}"></div>
+	</div>
+</body>
+</html>
